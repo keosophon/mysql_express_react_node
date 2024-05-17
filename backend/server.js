@@ -3,6 +3,7 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const mysqlConnection = mysql.createConnection({
   host: "localhost",
@@ -29,6 +30,19 @@ app.get("/", (req, res) => {
       return;
     }
     res.json(data);
+  });
+});
+
+app.post("/create", (req, res) => {
+  const { userName, email } = req.body;
+  const query = "INSERT INTO employee (username, email) VALUES (?, ?)";
+  mysqlConnection.query(query, [userName, email], (error, results) => {
+    if (error) {
+      console.error("Error inserting data:", error);
+      res.status(500).json({ message: "Error inserting data", error });
+    } else {
+      res.status(200).json({ message: "Data inserted successfully", results });
+    }
   });
 });
 

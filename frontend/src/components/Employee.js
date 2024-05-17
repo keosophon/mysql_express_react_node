@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Employee() {
   const [data, setData] = useState([]);
@@ -21,6 +22,7 @@ export default function Employee() {
       <h1>Employee</h1>
       <table>
         <thead>
+          <Link to="/Create">Add</Link>
           <tr>
             <th>ID</th>
             <th>Username</th>
