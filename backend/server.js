@@ -25,10 +25,7 @@ mysqlConnection.connect((err) => {
 app.get("/", (req, res) => {
   const sql = "select * from employee";
   mysqlConnection.query(sql, (err, data) => {
-    if (err) {
-      res.send("Cannot get data from server" + err.stack);
-      return;
-    }
+    if (err) return res.json("Cannot get data from server" + err.stack);
     res.json(data);
   });
 });
@@ -37,12 +34,18 @@ app.post("/create", (req, res) => {
   const { userName, email } = req.body;
   const query = "INSERT INTO employee (username, email) VALUES (?, ?)";
   mysqlConnection.query(query, [userName, email], (error, results) => {
-    if (error) {
-      console.error("Error inserting data:", error);
-      res.status(500).json({ message: "Error inserting data", error });
-    } else {
-      res.status(200).json({ message: "Data inserted successfully", results });
-    }
+    if (error) return res.json("error");
+    res.json(results);
+  });
+});
+
+app.delete("/student/:id", (req, res) => {
+  const query = "Delete From Employee where id = ?";
+  const id = req.params.id;
+  console.log(id);
+  mysqlConnection.query(query, [id], (error, results) => {
+    if (results) return res.json(results);
+    res.json("error");
   });
 });
 

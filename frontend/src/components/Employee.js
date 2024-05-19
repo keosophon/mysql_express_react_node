@@ -17,6 +17,14 @@ export default function Employee() {
     fetchData();
   }, []);
 
+  const handleDelete = async (e, id) => {
+    try {
+      await axios.delete("http://localhost:8000/student/" + id);
+      window.location.reload();
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
   return (
     <div>
       <h1>Employee</h1>
@@ -35,6 +43,8 @@ export default function Employee() {
               <td>{item.id}</td>
               <td>{item.username}</td>
               <td>{item.email}</td>
+              <button>update</button>
+              <button onClick={(e) => handleDelete(e, item.id)}>delete</button>
             </tr>
           ))}
         </tbody>
