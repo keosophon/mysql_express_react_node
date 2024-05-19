@@ -39,13 +39,22 @@ app.post("/create", (req, res) => {
   });
 });
 
+app.put("/update/employee/:id", (req, res) => {
+  const query = "UPDATE Employee SET username=?, email=? where id = ?";
+  const id = req.params.id;
+  const { userName, email } = req.body;
+  mysqlConnection.query(query, [userName, email, id], (error, results) => {
+    if (results) return res.json(results);
+    res.json("error", error);
+  });
+});
+
 app.delete("/student/:id", (req, res) => {
   const query = "Delete From Employee where id = ?";
   const id = req.params.id;
-  console.log(id);
   mysqlConnection.query(query, [id], (error, results) => {
     if (results) return res.json(results);
-    res.json("error");
+    res.json("error", error);
   });
 });
 

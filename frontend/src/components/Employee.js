@@ -22,7 +22,7 @@ export default function Employee() {
       await axios.delete("http://localhost:8000/student/" + id);
       window.location.reload();
     } catch (error) {
-      console.error("error", error);
+      console.log("error");
     }
   };
   return (
@@ -43,8 +43,8 @@ export default function Employee() {
               <td>{item.id}</td>
               <td>{item.username}</td>
               <td>{item.email}</td>
-              <button>update</button>
-              <button onClick={(e) => handleDelete(e, item.id)}>delete</button>
+              <Link to={`/update/employee/${item.id}`}>Update</Link>
+              <button onClick={(e) => handleDelete(e, item.id)}>Delete</button>
             </tr>
           ))}
         </tbody>
