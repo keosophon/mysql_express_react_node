@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Employee from "./components/Employee";
 import CreateEmployee from "./components/CreateEmployee";
 import UpdateEmployee from "./components/UpdateEmployee";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
       </header>
     </div>
     */
-    <div>
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Employee />}></Route>

@@ -26,29 +26,45 @@ export default function Employee() {
     }
   };
   return (
-    <div>
-      <h1>Employee</h1>
-      <table>
-        <thead>
-          <Link to="/Create">Add</Link>
-          <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.username}</td>
-              <td>{item.email}</td>
-              <Link to={`/update/employee/${item.id}`}>Update</Link>
-              <button onClick={(e) => handleDelete(e, item.id)}>Delete</button>
+    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
+      <div className="w-50 bg-white rounded ">
+        <Link className="btn btn-success m-2" to="/Create">
+          Add +
+        </Link>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.username}</td>
+                <td>{item.email}</td>
+                <td>
+                  <Link
+                    className="btn btn-primary"
+                    to={`/update/employee/${item.id}`}
+                  >
+                    Update
+                  </Link>
+                  <button
+                    className="btn btn-danger ms-2"
+                    onClick={(e) => handleDelete(e, item.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
